@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: template
+
+  datasource:
+
+    # 数据库连接1配置
+    one:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://120.79.15.65:3306/pay?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      username: root
+      password: xkc159159..
+
+    # 数据库连接2 配置
+    two:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://120.79.15.65:3306/vhr?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      username: root
+      password: xkc159159..
+
+    # 连接池配置
+    druid:
+      max-evictable-idle-time-millis: 60000
+      min-evictable-idle-time-millis: 30000
+      db-type: com.alibaba.druid.pool.DruidDataSource
+      initial-size: 10
+      min-idle: 10
+      max-active: 200
+      max-wait: 30000
+      validation-query: select 1 from dual
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #缓存开启
+      pool-prepared-statements: true
+      #缓存大小
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall,slf4j
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      enable: false
+
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+server:
+  port: 8888
+
+# mybatis配置
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.xkc.entity
+  mapper-locations: classpath*:mapper/**/*.xml
